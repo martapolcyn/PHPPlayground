@@ -1,0 +1,50 @@
+div {
+    height: max-content;
+    align-self: center;
+    align-items: center;
+    width: auto;
+}
+
+.parent {
+    width: 100%;
+}
+
+.child {
+    float: left;
+    width: 50%;
+
+}
+
+.item {
+    width: 90%;
+    align-items: center;
+    padding: 10px;
+}
+
+.quantity {
+    width: 5em;
+}
+
+.button_add {
+    background-color: yellow;
+}
+
+.button_remove {
+    background-color: orange;
+}
+
+.button_remove_all {
+    background-color: orangered;
+}
+
+.button_send {
+    background-color: lightgreen;
+}
+
+
+table,
+th,
+td {
+    border: 1px solid;
+    padding: 3px;
+}
