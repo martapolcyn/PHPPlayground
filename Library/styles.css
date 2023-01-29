@@ -19,6 +19,15 @@ div {
     width: max-content;
 }
 
+p {
+    align-items: center;
+    margin: auto;
+    padding: 5px;
+    height: max-content;
+    width: 40%;
+    justify-content: center;
+    text-align: left;
+}
 
 h1,
 h2,
@@ -40,6 +49,24 @@ form {
     margin: auto;
 }
 
+
+/* table style */
+table {
+    margin: 0 auto;
+    width: 60%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: lightgray;
+}
 
 
 /* Same-width input fields */
