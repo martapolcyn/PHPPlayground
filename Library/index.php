@@ -1,29 +1,51 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION["user_id"])) {
+    
+    $mysqli = require __DIR__ . "/database.php";
+    
+    $sql = "SELECT * FROM users
+            WHERE id = {$_SESSION["user_id"]}";
+            
+    $result = $mysqli->query($sql);
+    
+    $user = $result->fetch_assoc();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Biblioteka</title>
+    <title>Home</title>
 </head>
 <body>
-    <h1>Logowanie</h1>
-    <form method="post">
-        <label for="login">E-Mail</label>
-        <input type="email" name="email" id="email" required
-               value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
-        
-        <label for="password">Hasło</label>
-        <input type="password" name="password" id="password" required>
-        
-        <button class="button">Zaloguj się</button>
+<h1>Biblioteka</h1>
     
-        <br><br><br>
-        <div>
-            <h3>Nie masz jeszcze konta?</h3><br>
-            <h4><a href="signup.html">Zarejestruj się</a></h4>
-        </div>
-    </form>
+    <?php if (isset($user)): ?>
+        
+        <p>Witaj <?= htmlspecialchars($user["firstname"]) ?></p>
+        <p>Twoje dane: </p>
+
+        <p>Numer karty: <?= htmlspecialchars($user["id"]) ?></p>
+        <p>Imię: <?= htmlspecialchars($user["firstname"]) ?></p>
+        <p>Nazwisko: <?= htmlspecialchars($user["lastname"]) ?></p>
+        <p>Email: <?= htmlspecialchars($user["email"]) ?></p>
+        
+        <p><a href="logout.php">Wyloguj</a></p>
+        
+    <?php else: ?>
+        
+        <p><a href="login.php">Zaloguj się</a> lub <a href="signup.html">Załóż konto</a></p>
+        
+    <?php endif; ?>
 </body>
 </html>
+
+
