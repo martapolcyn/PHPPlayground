@@ -41,8 +41,14 @@ if (isset($_POST["remove"])) {
     }
 }
 
-$query = "SELECT * FROM books";
-$result = $mysqli->query($query);
+$query_books = "SELECT * FROM books";
+$result_books = $mysqli->query($query_books);
+
+$query_users = "SELECT * FROM users";
+$result_users = $mysqli->query($query_users);
+
+$query_borrowings = "SELECT * FROM borrowings";
+$result_borrowings = $mysqli->query($query_borrowings);
 
 ?>
 
@@ -71,7 +77,7 @@ $result = $mysqli->query($query);
             <th>Autor</th>
         </tr>
 
-        <?php while ($book = $result->fetch_assoc()) : ?>
+        <?php while ($book = $result_books->fetch_assoc()) : ?>
             <tr>
                 <td><?php echo $book["id"]; ?></td>
                 <td><?php echo $book["title"]; ?></td>
@@ -94,6 +100,51 @@ $result = $mysqli->query($query);
             <input type="submit" name="remove" value="Usuń">
         </form>
 
+        <br><br>
+        <h2>Lista użytkowników</h2>
+        <!-- <p style="color:green"> Jesteś adminem!</p> -->
+        <br><br>
+        <table>
+        <tr>
+            <th>Numer karty</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+        </tr>
+
+        <?php while ($user = $result_users->fetch_assoc()) : ?>
+            <tr>
+                <td><?php echo $user["id"]; ?></td>
+                <td><?php echo $user["firstname"]; ?></td>
+                <td><?php echo $user["lastname"]; ?></td>
+                <td><?php echo $user["email"]; ?></td>
+            </tr>
+        <?php endwhile; ?>
+        </table>
+        <br><br>
+        
+        <br><br>
+        <h2>Historia wypożyczeń</h2>
+        <!-- <p style="color:green"> Jesteś adminem!</p> -->
+        <br><br>
+        <table>
+        <tr>
+            <th>ID książki</th>
+            <th>Numer karty użytkownika</th>
+            <th>Data wypożyczenia</th>
+            <th>Data zwrotu</th>
+        </tr>
+
+        <?php while ($borrowing = $result_borrowings->fetch_assoc()) : ?>
+            <tr>
+                <td><?php echo $borrowing["id_book"]; ?></td>
+                <td><?php echo $borrowing["id_user"]; ?></td>
+                <td><?php echo $borrowing["date_borrow"]; ?></td>
+                <td><?php echo $borrowing["date_return"]; ?></td>
+            </tr>
+        <?php endwhile; ?>
+        </table>
+        <br><br>
 
         
     <?php else: ?>

@@ -16,8 +16,12 @@ if (isset($_SESSION["user_id"])) {
     $sql_books = "SELECT * FROM books";
     $result_books = $mysqli->query($sql_books);
 
-    $sql_borrowings = "SELECT * FROM borrowings WHERE id_user = {$_SESSION["user_id"]}";
-    $result_borrowings = $mysqli->query($sql_borrowings);
+    // $sql_borrowings = "SELECT * FROM borrowings WHERE id_user = {$_SESSION["user_id"]}";
+    // $result_borrowings = $mysqli->query($sql_borrowings);
+
+    $sql_borrowings = "SELECT * FROM borrowings INNER JOIN books ON borrowings.id_book = books.id WHERE id_user = {$_SESSION["user_id"]}";
+
+    $result_borrowings = mysqli_query($mysqli, $sql_borrowings);
 }
 
 if (isset($_POST["newborrow"])) {
@@ -113,18 +117,16 @@ if (isset($_POST["newborrow"])) {
         <br>
         <table>
         <tr>
-            <th>id</th>
-            <th>id user</th>
-            <th>id book</th>
+            <th>Autor</th>
+            <th>Tytuł</th>
             <th>Data wypożyczenia</th>
             <th>Data zwrotu</th>
         </tr>
 
         <?php while ($borrowing = $result_borrowings->fetch_assoc()) : ?>
             <tr>
-                <td><?php echo $borrowing["id"]; ?></td>
-                <td><?php echo $borrowing["id_user"]; ?></td>
-                <td><?php echo $borrowing["id_book"]; ?></td>
+                <td><?php echo $borrowing["author"]; ?></td>
+                <td><?php echo $borrowing["title"]; ?></td>
                 <td><?php echo $borrowing["date_borrow"]; ?></td>
                 <td><?php echo $borrowing["date_return"]; ?></td>
             </tr>
