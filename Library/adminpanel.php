@@ -15,8 +15,6 @@ if (isset($_SESSION["user_id"])) {
 }
 
 
-// tutaj
-
 if (isset($_POST["add"])) {
     $title = $_POST["title"];
     $author = $_POST["author"];
