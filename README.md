@@ -6,4 +6,4 @@ You will find some university projects here, i.e.:
 
 * registration form
 * simple shopping cart
-* library service
+* library service with administration panel
